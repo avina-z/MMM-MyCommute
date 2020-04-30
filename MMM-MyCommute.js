@@ -14,7 +14,6 @@
 *********************************/
 
 /* global config, Module, Log, moment */
-
 Module.register("MMM-MyCommute", {
 
 	defaults: {
@@ -362,10 +361,10 @@ Module.register("MMM-MyCommute", {
 		let now = moment();
 		if (timeInTraffic != null) {
 			if(this.config.showArrivalTime) {
-				timeEl.innerHTML = moment.duration(Number(timeInTraffic), "seconds").format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim}) + " - " + now.add(Number(timeInTraffic), "seconds").format("HH:mm");
+				timeEl.innerHTML = moment.utc(moment.duration(Number(timeInTraffic), "seconds").asMilliseconds()).format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim}) + " - " + now.add(Number(timeInTraffic), "seconds").format("HH:mm");
 			}
 			else {
-				timeEl.innerHTML = moment.duration(Number(timeInTraffic), "seconds").format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim});
+				timeEl.innerHTML = moment.utc(moment.duration(Number(timeInTraffic), "seconds").asMilliseconds()).format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim});
 			}
 			const variance = timeInTraffic / time;
 			if (this.config.colorCodeTravelTime) {
@@ -379,10 +378,10 @@ Module.register("MMM-MyCommute", {
 			}
 		} else {
 			if(this.config.showArrivalTime) {
-				timeEl.innerHTML = moment.duration(Number(time), "seconds").format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim}) + " - " + now.add(Number(time), "seconds").format("HH:mm");
+				timeEl.innerHTML = moment.utc(moment.duration(Number(time), "seconds").asMilliseconds()).format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim}) + " - " + now.add(Number(time), "seconds").format("HH:mm");
 			}
 			else {
-				timeEl.innerHTML = moment.duration(Number(time), "seconds").format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim});
+				timeEl.innerHTML = moment.utc(moment.duration(Number(time), "seconds").asMilliseconds()).format(this.config.travelTimeFormat, {trim: this.config.travelTimeFormatTrim});
 			}
 			timeEl.classList.add("status-good");
 		}
